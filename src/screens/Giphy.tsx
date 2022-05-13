@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Container, Alert } from 'react-bootstrap';
+import SearchBar from "../components/SearchBar/SearchBar";
 import { getSearchingGifs, getTrendingGifs } from "../services/GiphyService";
 
 const Giphy = () => {
@@ -70,6 +71,11 @@ const Giphy = () => {
             {!isLoading && data.length === 0 && <Alert>No Gifs to load</Alert>}
             <Row>
                 <Col><h1>Giphy API</h1></Col>
+            </Row>
+            <Row>
+                <Col>
+                <SearchBar onClick={() => handleSearch(0, search)} onChange={(e: any) => handleSearch(e.target.value, "search")} onKeyDown={(e: any) => { if (e.key === "Enter") { handleSearch(e.target.value, "Search"); renderSearchData(0, search); } }}/>
+                </Col>
             </Row>
         </Container>
     );
