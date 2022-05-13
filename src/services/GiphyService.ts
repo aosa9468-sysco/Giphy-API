@@ -15,7 +15,7 @@ export const getTrendingGifs = async (offset: number) => {
 }
 
 export const getSearchingGifs = async (offset: number, searchVal: any) => {
-    return fetch(GIPHY_URL + '/search?api_key=' + GIPHY_API_KEY + '&offset=' + offset + '&q=' + searchVal)
+    return fetch(GIPHY_URL +'/search?api_key=' + GIPHY_API_KEY + '&offset=' + offset + '&q=' + searchVal)
         .then(response => {
             if (response.status === 200) {
                 return response.json();
