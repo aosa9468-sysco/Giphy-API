@@ -4,7 +4,7 @@ import { SearchBarProps } from "./SearchBar.Interface";
 
 function SearchBar(props: SearchBarProps) {
     return (
-        <InputGroup size="lg">
+        <InputGroup>
             <FormControl
                 placeholder="Search Gifs"
                 aria-label="Search Gifs"

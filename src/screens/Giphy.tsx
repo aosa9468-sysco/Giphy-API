@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Container, Alert } from 'react-bootstrap';
+import AlertLabel from "../components/Alert/AlertLabel";
 import Gifs from "../components/Gifs/Gifs";
+import Loader from "../components/Loader/loader";
 import Paginate from "../components/Pagination/Pagination";
 import SearchBar from "../components/SearchBar/SearchBar";
 import { getSearchingGifs, getTrendingGifs } from "../services/GiphyService";
@@ -64,6 +66,9 @@ const Giphy = () => {
     }
 
     const handleSearch = (value: any, currentState: any) => {
+        if(!value){
+            renderTrendingData(offset);
+        }
         setCurrentState(currentState)
         setSearch(value)
     }
@@ -71,15 +76,16 @@ const Giphy = () => {
     return (
         <Container>
             {!isLoading && data.length === 0 && <Alert>No Gifs to load</Alert>}
+            <br/>
             <Row>
-                <Col><h1>Giphy API</h1></Col>
-            </Row>
-            <Row>
+                <Col/>
+                <Col><h1>Gif Finder</h1></Col>
                 <Col>
                     <SearchBar onClick={() => handleSearch(0, search)} onChange={(e: any) => handleSearch(e.target.value, "search")} onKeyDown={(e: any) => { if (e.key === "Enter") { handleSearch(e.target.value, "Search"); renderSearchData(0, search); } }} />
                 </Col>
             </Row>
-
+            <br/>
+            {!isLoading && data.length === 0 && <AlertLabel text="Loading issue. Please try again" variant="danger" />}
             {totalPages !== 0 && !isLoading && <Paginate
                 totPages={totalPages}
                 currentPage={currentPage}
@@ -89,7 +95,7 @@ const Giphy = () => {
             >
                 <Gifs data={data} />
             </Paginate>}
-
+            {isLoading && <Loader/>}
         </Container>
     );
 };
