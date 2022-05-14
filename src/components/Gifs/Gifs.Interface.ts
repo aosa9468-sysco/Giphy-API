@@ -1,4 +1,4 @@
-export interface Image{
+export interface ImageInterface{
     '480w_still'?: ImageProps;
     downsized?: ImageProps;
     downsized_large?: ImageProps;
@@ -44,7 +44,7 @@ interface Gifs {
     content_url?: string;
     embed_url?: string;
     id?: string;
-    images: Image[];
+    images: ImageInterface[];
     import_datetime?: string;
     is_sticker?: number;
     rating?: string;

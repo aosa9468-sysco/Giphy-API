@@ -1,10 +1,10 @@
-.gif-wrap {
+.img-wrap {
     background-color: #fff;
-    margin-bottom: .8em;
+    margin-bottom: .9em;
     position: relative;
   }
 
-.gif-wrap img {
+.img-wrap img {
     width: 100%;
     background-color: lightgray;
     min-width: 100%;
