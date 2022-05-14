@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Container, Alert } from 'react-bootstrap';
 import Gifs from "../components/Gifs/Gifs";
+import Paginate from "../components/Pagination/Pagination";
 import SearchBar from "../components/SearchBar/SearchBar";
 import { getSearchingGifs, getTrendingGifs } from "../services/GiphyService";
 
@@ -8,7 +9,7 @@ const Giphy = () => {
     const [data, setData] = useState([]);
     const [search, setSearch] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    
+
     let [offset, setOffset] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
@@ -38,7 +39,7 @@ const Giphy = () => {
         await getTrendingGifs(offset).then((data) => {
             setData(data.data)
             setIsLoading(false)
-            if(data.pagination.count !== 0) {
+            if (data.pagination.count !== 0) {
                 setTotalPages(Math.floor(data.pagination.total_count / data.pagination.count))
             }
         }).catch((error) => {
@@ -53,7 +54,7 @@ const Giphy = () => {
         await getSearchingGifs(offset, searchVal).then((data) => {
             setData(data.data)
             setIsLoading(false)
-            if(data.pagination.count !== 0) {
+            if (data.pagination.count !== 0) {
                 setTotalPages(Math.floor(data.pagination.total_count / data.pagination.count))
             }
         }).catch((error) => {
@@ -75,10 +76,20 @@ const Giphy = () => {
             </Row>
             <Row>
                 <Col>
-                <SearchBar onClick={() => handleSearch(0, search)} onChange={(e: any) => handleSearch(e.target.value, "search")} onKeyDown={(e: any) => { if (e.key === "Enter") { handleSearch(e.target.value, "Search"); renderSearchData(0, search); } }}/>
+                    <SearchBar onClick={() => handleSearch(0, search)} onChange={(e: any) => handleSearch(e.target.value, "search")} onKeyDown={(e: any) => { if (e.key === "Enter") { handleSearch(e.target.value, "Search"); renderSearchData(0, search); } }} />
                 </Col>
             </Row>
-            <Gifs data={data}/>
+
+            {totalPages !== 0 && !isLoading && <Paginate
+                totPages={totalPages}
+                currentPage={currentPage}
+                pageClicked={(ele: any) => {
+                    pageSelected(ele);
+                }}
+            >
+                <Gifs data={data} />
+            </Paginate>}
+
         </Container>
     );
 };
