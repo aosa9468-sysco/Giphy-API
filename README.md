@@ -2,6 +2,8 @@
 
 A single-page web application that leverages data from the Giphy API
 
+![Alt text](src/Fixtures/Giphy.png?raw=true "Giphy API")
+
 ### Running the app locally
 - Clone the project
 - Make sure you've Node and NPM installed
@@ -11,6 +13,3 @@ A single-page web application that leverages data from the Giphy API
 
 ### Running the tests locally
 - Run `npm run cypress open-ct` to see the tests running in Chrome
-
-### Notes
-- It took me around 2 days to complete this project.
